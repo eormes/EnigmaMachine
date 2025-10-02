@@ -1,0 +1,61 @@
+Ethan Ormes, CSCI200, Enigma Machine
+
+PROBLEM DESCRIPTION
+This project is a simulation of the historical Enigma machine, designed to encode and decode messages based on user-defined configurations. The program allows the user to configure the machine’s settings (rotors, plugboard, and reflector), and process the message through file input and output. The encoded or decoded message is saved to a file, ensuring only individuals with the same configuration can interpret the message correctly.
+
+PROGRAM DOCUMENTATION
+How to Run:
+
+Compile the program using a C++ compiler
+Run the executable and follow the prompts to set up the machine.
+Provide input/output file paths as required during operation.
+Choose whether to encode another message or exit after the operation completes.
+For Programmers:
+The program is modular, with classes (Rotor, PlugBoard, Machine, InputProcessor, and OutputProcessor) encapsulating specific functionalities. Modifications and extensions can be made easily:
+
+Additional Functionality: Implement new encryption logic by extending the Rotor or PlugBoard classes.
+Improved User Interface: Replace the console interface with a graphical or web-based interface.
+Dynamic Key Generation: Add functionality to generate random encryption configurations.
+Changes from Proposal:
+In the final implementation, the Encoder and Decoder were unified under a single Machine class for simplicity and better design. Instead of integer arrays for keys, a more dynamic and realistic rotor-based mechanism was implemented.
+
+CLASS DESCRIPTION
+Machine Class:
+The Machine class simulates the core operations of the Enigma machine.
+
+Data Encapsulation: It holds and manages rotors, the plugboard, and the reflector.
+Key Methods:
+exchange(char letter): Encodes/decodes a single character.
+addRotor(Rotor r): Adds a rotor to the machine.
+addPlugBoard(PlugBoard p): Configures the plugboard.
+addReflector(PlugBoard r): Sets the reflector.
+This structure allowed for a clean division of responsibilities and made the program flexible for enhancements.
+
+Exchangeable Interface (or Base Class):
+
+Serves as a polymorphic interface for components that perform letter substitutions (e.g., Rotor and PlugBoard).
+Key Method:
+exchange(char letter): An abstract method that all derived classes implement to define their substitution logic.
+
+Rotor Class:
+
+Represents a single rotor in the Enigma machine, including its internal wiring and notch position.
+Data: the rotors wiring, initial notch positions, and the current rotation state.
+Key Methods:
+encode(char letter): Applies the rotor's substitution to a character.
+rotate(): Advances the rotor's position, simulating real-life rotor movement.
+
+LIST DATA STRUCTURE
+The program uses a std::vector to store the list of rotors in the Machine class. This choice was made for its ability to dynamically adjust to the number of rotors chosen by the user while providing fast iteration and access. The vector structure simplified the chaining mechanism of the Enigma machine.
+
+FILE I/O
+File input and output were implemented in the InputProcessor and OutputProcessor classes. These classes handle:
+
+Reading plain or encoded text from a file.
+Writing the processed text back to a file.
+This was necessary to handle messages longer than a single line and ensured the program’s output could be easily reused or verified.
+
+REFLECTIONS
+Through this project, I gained practical experience with object-oriented programming principles and file handling in C++. I learned how to design and implement custom classes to represent complex systems while ensuring modularity and reusability. A major challenge was managing the exchange logic with the rotors, which required careful debugging to prevent program crashes or unintended behavior.
+
+If I were to revisit this project, I would have more test cases going into the debugging process where I knew what the output was suppossed to be and could easily check it and improve the input system. I would also explore adding features like key generation and a graphical user interface to make the program more accessible and user-friendly.
