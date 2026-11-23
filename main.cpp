@@ -116,7 +116,7 @@ int main()
             {
                 if(plugboard.set(letter1,letter2))
                 {
-                    cout << "Conntected " << letter1 << " to " << letter2 << endl;
+                    cout << "Connected " << letter1 << " to " << letter2 << endl;
                     break;
                 }
                 else
@@ -140,7 +140,7 @@ int main()
         cin >> reflectorPreset;
         if(cin.fail() || cin.peek() != '\n' || reflectorPreset < 1 || reflectorPreset > 3)
         {
-            cout << "Please enter a valid number (an ineger from 1-3)" << endl;
+            cout << "Please enter a valid number (an integer from 1-3)" << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
@@ -182,14 +182,14 @@ int main()
             cin >> decision;
             if(decision == 'y' || decision == 'Y')
             {
-                break;
                 enigma.resetRotors();
+                break;
             }
             else if(decision == 'n' || decision == 'N')
             {
                 cout << "Thank you" << endl;
-                break;
                 gameLoop = false;
+                break;
             }
             else
             {
