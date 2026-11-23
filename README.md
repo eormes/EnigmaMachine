@@ -63,10 +63,33 @@ Run the program and follow the prompts:
 
 To decode a message, run the program again with **identical settings** and use the encoded file as the input.
 
+## Design
+
+The program is object-oriented, with each part of the machine in its own class:
+
+- **`Machine`** owns the rotors, plugboard, and reflector. Its `exchange(char)` method sends one letter through the whole machine, and `addRotor`, `addPlugBoard`, and `addReflector` set it up.
+- **`Exchangeable`** is a base class that gives every substitution component (rotors and plugboards) the same `exchange` interface, so the machine can treat them the same way through polymorphism.
+- **`Rotor`** stores one rotor's wiring, starting notch position, and current rotation. It applies its substitution to a letter and advances (`rotate`) like a real rotor.
+- **`InputProcessor` / `OutputProcessor`** handle reading the message from a file and writing the result back, which allows messages longer than one line.
+
+The rotors are stored in a `std::vector`, so the machine can use any number of rotors the user picks while still iterating over them quickly in order.
+
+An early plan used separate encoder and decoder classes and integer arrays for keys. The final version merges both into the single `Machine` class (encoding and decoding are the same operation on an Enigma) and uses rotor-based wiring instead, which is simpler and closer to the real machine.
+
 ## Notes
 
 - Only uppercase letters A–Z are used for plugboard connections.
 - Settings are chosen once per run and reused for every message in that session.
+
+## Reflections
+
+This project gave me practical experience with object-oriented design and file handling in C++. The hardest part was getting the rotor exchange logic right, which took careful debugging to avoid crashes and wrong output. Next time I would build a set of test messages with known correct results before debugging, so I can check changes quickly.
+
+## Future Improvements
+
+- Generate random machine configurations
+- Replace the console prompts with a graphical or web interface
+- Add automated tests with known input and output pairs
 
 ## Author
 
